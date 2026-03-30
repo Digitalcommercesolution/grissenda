@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point of Sale | Grissenda Euphorias CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans h-screen flex overflow-hidden">
+    <!-- POS Sidebar (Fixed for speed) -->
+    <aside class="w-20 bg-luxury-900 text-white flex flex-col items-center py-8 space-y-8 flex-shrink-0">
+        <a href="admin.html" class="p-3 hover:bg-white/10 rounded-2xl transition-all" title="Back to CRM">
+            <i data-lucide="arrow-left" class="h-6 w-6"></i>
+        </a>
+        <div class="w-10 h-0.5 bg-white/10"></div>
+        <button class="p-3 bg-white/10 rounded-2xl text-luxury-300" title="New Sale">
+            <i data-lucide="plus-circle" class="h-6 w-6"></i>
+        </button>
+        <button class="p-3 hover:bg-white/10 rounded-2xl transition-all" title="Register History">
+            <i data-lucide="history" class="h-6 w-6"></i>
+        </button>
+        <button class="p-3 hover:bg-white/10 rounded-2xl transition-all mt-auto" title="Settings">
+            <i data-lucide="settings" class="h-6 w-6"></i>
+        </button>
+    </aside>
+
+    <!-- Main POS Interface -->
+    <main class="flex-grow flex">
+        <!-- Product Catalog (Left) -->
+        <div class="flex-grow p-8 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-2xl font-serif font-bold">Terminal Register 01</h1>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest font-bold">Studio Boutique POS</p>
+                </div>
+                <div class="relative w-96">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                    <input type="text" id="pos-search" placeholder="Scan barcode or type fragrance name..." class="w-full bg-white border-none rounded-2xl py-4 pl-12 pr-6 shadow-sm focus:ring-2 focus:ring-luxury-500 transition-all text-sm">
+                </div>
+            </header>
+
+            <!-- Product Grid -->
+            <div id="pos-product-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 overflow-y-auto pr-2">
+                <!-- Products Injected by JS -->
+            </div>
+        </div>
+
+        <!-- Cart & Checkout (Right) -->
+        <div class="w-[450px] bg-white shadow-2xl flex flex-col flex-shrink-0">
+            <!-- Customer Selector -->
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-gray-400 text-xs uppercase tracking-widest">Customer</h3>
+                    <button class="text-luxury-600 text-xs font-bold hover:underline">+ New Profile</button>
+                </div>
+                <div class="flex items-center space-x-4 p-4 bg-luxury-50 rounded-2xl border border-luxury-100">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-luxury-600 font-bold border border-luxury-200">W</div>
+                    <div class="flex-grow">
+                        <div class="text-sm font-bold">Walk-in Customer</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest font-medium">Standard Retail</div>
+                    </div>
+                    <i data-lucide="chevron-down" class="h-4 w-4 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Terminal Cart -->
+            <div class="flex-grow overflow-y-auto p-6 space-y-4" id="pos-cart">
+                <!-- Items Injected by JS -->
+                <div id="empty-pos-cart" class="h-full flex flex-col items-center justify-center text-center opacity-30">
+                    <i data-lucide="shopping-bag" class="h-16 w-16 mb-4"></i>
+                    <p class="font-serif font-bold text-lg">Cart is Empty</p>
+                    <p class="text-xs">Add products to begin a sale</p>
+                </div>
+            </div>
+
+            <!-- Totals & Actions -->
+            <div class="p-8 bg-gray-50 border-t border-gray-100">
+                <div class="space-y-3 mb-8">
+                    <div class="flex justify-between text-gray-400 text-sm">
+                        <span>Subtotal</span>
+                        <span id="pos-subtotal">R 0.00</span>
+                    </div>
+                    <div class="flex justify-between text-gray-400 text-sm">
+                        <span>Tax (15% VAT)</span>
+                        <span id="pos-tax">R 0.00</span>
+                    </div>
+                    <div class="flex justify-between text-2xl font-serif font-bold pt-4 border-t border-gray-200">
+                        <span>Total</span>
+                        <span id="pos-total">R 0.00</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="clearPOS()" class="py-4 border border-gray-200 rounded-2xl font-bold text-gray-400 hover:bg-gray-100 transition-all">Cancel</button>
+                    <button onclick="openPaymentModal()" id="checkout-btn" disabled class="py-4 bg-luxury-900 text-white rounded-2xl font-bold shadow-lg hover:bg-luxury-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all">Charge Sale</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
+        <div class="bg-white w-[500px] rounded-[40px] shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+            <div class="p-10 text-center border-b border-gray-100">
+                <h2 class="text-3xl font-serif font-bold mb-2">Finalize Sale</h2>
+                <p class="text-luxury-400 font-bold text-lg" id="modal-total">Total: R 0.00</p>
+            </div>
+            
+            <div class="p-10 space-y-6">
+                <div class="grid grid-cols-3 gap-4">
+                    <button onclick="processPOSPayment('Cash')" class="flex flex-col items-center justify-center p-6 border border-gray-100 rounded-[30px] hover:border-luxury-500 hover:bg-luxury-50 transition-all group">
+                        <i data-lucide="banknote" class="h-8 w-8 text-gray-400 group-hover:text-luxury-600 mb-3"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest">Cash</span>
+                    </button>
+                    <button onclick="processPOSPayment('Card')" class="flex flex-col items-center justify-center p-6 border border-gray-100 rounded-[30px] hover:border-luxury-500 hover:bg-luxury-50 transition-all group">
+                        <i data-lucide="credit-card" class="h-8 w-8 text-gray-400 group-hover:text-luxury-600 mb-3"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest">Card</span>
+                    </button>
+                    <button onclick="processPOSPayment('EFT')" class="flex flex-col items-center justify-center p-6 border border-gray-100 rounded-[30px] hover:border-luxury-500 hover:bg-luxury-50 transition-all group">
+                        <i data-lucide="landmark" class="h-8 w-8 text-gray-400 group-hover:text-luxury-600 mb-3"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest">EFT</span>
+                    </button>
+                </div>
+                
+                <button onclick="closePaymentModal()" class="w-full text-gray-400 font-bold text-sm uppercase tracking-widest hover:text-gray-600">Go Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Overlay (Success) -->
+    <div id="receipt-overlay" class="fixed inset-0 bg-luxury-900/95 z-[200] flex flex-col items-center justify-center hidden">
+        <div class="bg-white w-[400px] p-10 rounded-2xl shadow-2xl mb-8 relative">
+            <div class="text-center mb-8">
+                <i data-lucide="flower-2" class="h-10 w-10 text-luxury-600 mx-auto mb-4"></i>
+                <h3 class="font-serif font-bold text-xl uppercase">Grissenda Euphorias</h3>
+                <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]">Luxury Fragrance Studio</p>
+            </div>
+            
+            <div class="border-y border-dashed border-gray-200 py-6 my-6 space-y-4" id="receipt-items">
+                <!-- Items Injected -->
+            </div>
+            
+            <div class="flex justify-between font-bold text-lg mb-8">
+                <span>TOTAL</span>
+                <span id="receipt-total">R 0.00</span>
+            </div>
+            
+            <div class="text-center space-y-2 opacity-50">
+                <p class="text-[10px] uppercase font-bold tracking-widest">Receipt #POS-2026-001</p>
+                <p class="text-[10px] uppercase font-bold tracking-widest" id="receipt-date"></p>
+            </div>
+
+            <!-- Receipt "Cut" edges -->
+            <div class="absolute -bottom-2 left-0 w-full h-4 bg-white flex overflow-hidden">
+                ${Array(20).fill('<div class="w-4 h-4 bg-luxury-900 rotate-45 flex-shrink-0 -mt-2"></div>').join('')}
+            </div>
+        </div>
+        
+        <div class="flex space-x-4">
+            <button onclick="window.print()" class="bg-white text-luxury-900 px-8 py-4 rounded-full font-bold shadow-xl flex items-center space-x-3"><i data-lucide="printer" class="h-5 w-5"></i><span>Print Receipt</span></button>
+            <button onclick="newSale()" class="bg-luxury-500 text-white px-8 py-4 rounded-full font-bold shadow-xl flex items-center space-x-3"><i data-lucide="plus" class="h-5 w-5"></i><span>New Sale</span></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        let posCart = [];
+
+        function renderPOSProducts() {
+            const grid = document.getElementById('pos-product-grid');
+            const search = document.getElementById('pos-search').value.toLowerCase();
+            
+            grid.innerHTML = fragrances.filter(f => f.name.toLowerCase().includes(search)).map(f => `
+                <div onclick="addToPOSCart(${f.id})" class="bg-white p-4 rounded-[30px] shadow-sm border border-transparent hover:border-luxury-500 hover:shadow-md transition-all cursor-pointer group">
+                    <div class="aspect-square rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="${f.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 flex items-center justify-center transition-all">
+                            <i data-lucide="plus" class="text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm font-bold truncate">${f.name}</div>
+                    <div class="text-xs text-luxury-600 font-bold mt-1">R ${f.price.toLocaleString()}</div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function addToPOSCart(id) {
+            const product = fragrances.find(f => f.id === id);
+            const existing = posCart.find(i => i.id === id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                posCart.push({ ...product, quantity: 1 });
+            }
+            renderPOSCart();
+        }
+
+        function removeFromPOSCart(id) {
+            posCart = posCart.filter(i => i.id !== id);
+            renderPOSCart();
+        }
+
+        function updatePOSQty(id, delta) {
+            const item = posCart.find(i => i.id === id);
+            if (item) {
+                item.quantity = Math.max(1, item.quantity + delta);
+                renderPOSCart();
+            }
+        }
+
+        function renderPOSCart() {
+            const cartEl = document.getElementById('pos-cart');
+            const emptyEl = document.getElementById('empty-pos-cart');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (posCart.length === 0) {
+                cartEl.innerHTML = '';
+                cartEl.appendChild(emptyEl);
+                checkoutBtn.disabled = true;
+                updatePOSTotals(0);
+                return;
+            }
+
+            emptyEl.remove();
+            checkoutBtn.disabled = false;
+            
+            let subtotal = 0;
+            cartEl.innerHTML = posCart.map(item => {
+                subtotal += item.price * item.quantity;
+                return `
+                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-2xl animate-in slide-in-from-right-4 duration-300">
+                        <div class="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                            <img src="${item.image}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="text-xs font-bold">${item.name}</div>
+                            <div class="text-[10px] text-luxury-600 font-bold">R ${item.price.toLocaleString()}</div>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-white px-3 py-1 rounded-full border border-gray-100">
+                            <button onclick="updatePOSQty(${item.id}, -1)" class="text-gray-400 hover:text-luxury-600"><i data-lucide="minus" class="h-3 w-3"></i></button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updatePOSQty(${item.id}, 1)" class="text-gray-400 hover:text-luxury-600"><i data-lucide="plus" class="h-3 w-3"></i></button>
+                        </div>
+                        <button onclick="removeFromPOSCart(${item.id})" class="text-gray-300 hover:text-red-500"><i data-lucide="x" class="h-4 w-4"></i></button>
+                    </div>
+                `;
+            }).join('');
+            
+            updatePOSTotals(subtotal);
+            lucide.createIcons();
+        }
+
+        function updatePOSTotals(subtotal) {
+            const tax = subtotal * 0.15;
+            const total = subtotal; // Assuming VAT included in price for retail
+            
+            document.getElementById('pos-subtotal').textContent = `R ${(subtotal - tax).toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('pos-tax').textContent = `R ${tax.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('pos-total').textContent = `R ${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('modal-total').textContent = `Total: R ${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        }
+
+        function openPaymentModal() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+        }
+
+        function processPOSPayment(method) {
+            showToast(`Processing ${method} payment...`);
+            setTimeout(() => {
+                showToast("Transaction Approved.");
+                document.getElementById('payment-modal').classList.add('hidden');
+                showReceipt();
+            }, 1500);
+        }
+
+        function showReceipt() {
+            const overlay = document.getElementById('receipt-overlay');
+            const itemsEl = document.getElementById('receipt-items');
+            const totalEl = document.getElementById('receipt-total');
+            const dateEl = document.getElementById('receipt-date');
+            
+            let total = 0;
+            itemsEl.innerHTML = posCart.map(item => {
+                total += item.price * item.quantity;
+                return `
+                    <div class="flex justify-between text-xs">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>R ${(item.price * item.quantity).toLocaleString()}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            totalEl.textContent = `R ${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            dateEl.textContent = new Date().toLocaleString();
+            
+            overlay.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function newSale() {
+            posCart = [];
+            renderPOSCart();
+            document.getElementById('receipt-overlay').classList.add('hidden');
+            document.getElementById('pos-search').value = '';
+            renderPOSProducts();
+        }
+
+        function clearPOS() {
+            if (confirm("Are you sure you want to clear the current sale?")) {
+                posCart = [];
+                renderPOSCart();
+            }
+        }
+
+        document.getElementById('pos-search').addEventListener('input', renderPOSProducts);
+
+        // Init
+        renderPOSProducts();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

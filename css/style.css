@@ -1,0 +1,65 @@
+/* Custom Luxury Styles */
+:root {
+  --luxury-50: #fdf8f6;
+  --luxury-100: #f2e8e5;
+  --luxury-200: #eaddd7;
+  --luxury-300: #e0cec7;
+  --luxury-400: #d2bab0;
+  --luxury-500: #bfa094;
+  --luxury-600: #a18072;
+  --luxury-700: #977669;
+  --luxury-800: #846358;
+  --luxury-900: #43302b;
+}
+
+body {
+  background-color: var(--luxury-50);
+  color: var(--luxury-900);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.luxury-gradient {
+  background: linear-gradient(135deg, #bfa094 0%, #846358 100%);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--luxury-400);
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--luxury-600);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--luxury-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--luxury-200);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--luxury-300);
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Grissenda Euphorias</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-luxury-50 text-luxury-900 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-luxury-100 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i data-lucide="flower-2" class="h-8 w-8 text-luxury-600"></i>
+                    <span class="text-xl font-serif font-bold text-luxury-900 tracking-tight">
+                        Grissenda <span class="text-luxury-500">Euphorias</span>
+                    </span>
+                </a>
+                <a href="index.html" class="text-luxury-400 hover:text-luxury-600 flex items-center text-sm font-medium">
+                    <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4">
+        <div class="max-w-md w-full">
+            <div class="bg-white p-10 rounded-[40px] shadow-xl border border-luxury-100">
+                <div class="text-center mb-10">
+                    <div class="bg-luxury-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="lock" class="h-8 w-8 text-luxury-600"></i>
+                    </div>
+                    <h1 class="text-3xl font-serif font-bold mb-2">Welcome Back</h1>
+                    <p class="text-luxury-400">Sign in to your account to continue</p>
+                </div>
+
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-xs font-bold uppercase tracking-widest text-luxury-400 mb-2">Username / Email</label>
+                        <div class="relative">
+                            <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-luxury-300"></i>
+                            <input type="text" id="username" required 
+                                class="w-full pl-12 pr-4 py-4 bg-luxury-50 border border-luxury-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-luxury-500 focus:bg-white transition-all"
+                                placeholder="Enter your username">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-xs font-bold uppercase tracking-widest text-luxury-400 mb-2">Password</label>
+                        <div class="relative">
+                            <i data-lucide="key-round" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-luxury-300"></i>
+                            <input type="password" id="password" required 
+                                class="w-full pl-12 pr-4 py-4 bg-luxury-50 border border-luxury-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-luxury-500 focus:bg-white transition-all"
+                                placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <div id="errorMessage" class="hidden bg-red-50 text-red-600 text-sm p-4 rounded-xl border border-red-100">
+                        Invalid username or password. Please try again.
+                    </div>
+
+                    <button type="submit" class="w-full bg-luxury-900 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-luxury-800 transition-all shadow-lg shadow-luxury-900/20 flex items-center justify-center group">
+                        Sign In
+                        <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+
+                <!-- Demo Credentials -->
+                <div class="mt-12 pt-8 border-t border-luxury-50">
+                    <h3 class="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-luxury-300 mb-6">Demo Accounts</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-luxury-50/50 p-4 rounded-2xl border border-luxury-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] font-bold text-luxury-400 uppercase">Customer Account</span>
+                                <i data-lucide="users" class="h-3 w-3 text-luxury-400"></i>
+                            </div>
+                            <p class="text-xs text-luxury-600 font-medium mb-1">User: <span class="select-all">magubhelaminenhle</span></p>
+                            <p class="text-xs text-luxury-600 font-medium">Pass: <span class="select-all">mini@068</span></p>
+                        </div>
+                        <div class="bg-luxury-900/5 p-4 rounded-2xl border border-luxury-900/10">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] font-bold text-luxury-900/40 uppercase">Admin Account</span>
+                                <i data-lucide="shield-check" class="h-3 w-3 text-luxury-900/40"></i>
+                            </div>
+                            <p class="text-xs text-luxury-900/70 font-medium mb-1">User: <span class="select-all">admin@ge</span></p>
+                            <p class="text-xs text-luxury-900/70 font-medium">Pass: <span class="select-all">123456789</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8 text-center text-luxury-300 text-sm">
+        &copy; 2026 Grissenda Euphorias. All rights reserved.
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Login Logic
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            errorMessage.classList.add('hidden');
+
+            // Admin Login
+            if (username === 'admin@ge' && password === '123456789') {
+                localStorage.setItem('userRole', 'admin');
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Customer Login
+            if (username === 'magubhelaminenhle' && password === 'mini@068') {
+                localStorage.setItem('userRole', 'customer');
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            // Failed Login
+            errorMessage.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

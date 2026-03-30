@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Overview | Grissenda Euphorias CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+                <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 transition-all"><i data-lucide="log-out" class="h-5 w-5"></i><span class="font-medium">Logout</span></button>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">Admin Overview</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">Welcome back. System health is optimal.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- CRM System Health -->
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-green-50 rounded-full border border-green-100">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-green-700">System Live</span>
+                    </div>
+                    <button class="p-2 text-gray-400 hover:text-gray-600 relative">
+                        <i data-lucide="bell" class="h-6 w-6"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                    <div class="w-10 h-10 rounded-full bg-luxury-100 flex items-center justify-center text-luxury-600 font-bold border-2 border-white shadow-sm">A</div>
+                </div>
+            </header>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Sales</div>
+                    <div class="text-3xl font-serif font-bold">R 45,280</div>
+                    <div class="text-green-600 text-xs mt-2 flex items-center"><i data-lucide="trending-up" class="h-3 w-3 mr-1"></i>+12.5% this month</div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Customers</div>
+                    <div class="text-3xl font-serif font-bold">124</div>
+                    <div class="text-green-600 text-xs mt-2 flex items-center"><i data-lucide="trending-up" class="h-3 w-3 mr-1"></i>+5 new today</div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Pending Orders</div>
+                    <div class="text-3xl font-serif font-bold">8</div>
+                    <div class="text-amber-600 text-xs mt-2 italic">Requires attention</div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Conversion Rate</div>
+                    <div class="text-3xl font-serif font-bold">3.2%</div>
+                    <div class="text-gray-400 text-xs mt-2 italic">Avg across all pages</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <!-- Main Content Area -->
+                <div class="lg:col-span-2 space-y-10">
+                    <!-- Sales Pipeline Stages -->
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="text-2xl font-serif font-bold">Sales Pipeline Stages</h3>
+                            <a href="admin-orders.html" class="text-luxury-600 text-xs font-bold uppercase tracking-widest hover:underline">View All Orders</a>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div class="bg-gray-50 p-6 rounded-3xl text-center border-t-4 border-luxury-200">
+                                <div class="text-xl font-bold mb-1">12</div>
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Enquiry</div>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-3xl text-center border-t-4 border-luxury-300">
+                                <div class="text-xl font-bold mb-1">5</div>
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Sample</div>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-3xl text-center border-t-4 border-luxury-400">
+                                <div class="text-xl font-bold mb-1">8</div>
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Quoted</div>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-3xl text-center border-t-4 border-luxury-600">
+                                <div class="text-xl font-bold mb-1">15</div>
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Confirmed</div>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-3xl text-center border-t-4 border-luxury-900">
+                                <div class="text-xl font-bold mb-1">42</div>
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders -->
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                        <h3 class="text-2xl font-serif font-bold mb-8">Recent Orders</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 rounded-full bg-luxury-100 flex items-center justify-center text-luxury-600 font-bold">JD</div>
+                                    <div>
+                                        <div class="text-sm font-bold">Jane Doe</div>
+                                        <div class="text-xs text-gray-400">Midnight Velvet</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold">R 1,850</div>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md bg-amber-100 text-amber-700">Paid</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 rounded-full bg-luxury-100 flex items-center justify-center text-luxury-600 font-bold">SM</div>
+                                    <div>
+                                        <div class="text-sm font-bold">Sibusiso M.</div>
+                                        <div class="text-xs text-gray-400">Santal Oasis</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold">R 1,980</div>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md bg-green-100 text-green-700">Shipped</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar Content -->
+                <div class="space-y-10">
+                    <!-- CRM System Alerts -->
+                    <div class="bg-luxury-900 p-8 rounded-[40px] shadow-xl text-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                        <h3 class="text-xl font-serif font-bold mb-6 relative z-10 flex items-center space-x-3">
+                            <i data-lucide="zap" class="h-5 w-5 text-luxury-300"></i>
+                            <span>Lead Scoring</span>
+                        </h3>
+                        <p class="text-sm text-luxury-200 mb-6 relative z-10 italic">"3 high-potential leads haven't been followed up in 48 hours."</p>
+                        <a href="admin-customers.html" class="block w-full bg-white text-luxury-900 py-3 rounded-xl font-bold text-center text-xs uppercase tracking-widest hover:bg-luxury-50 transition-all relative z-10">Review Leads</a>
+                    </div>
+
+                    <!-- Task System -->
+                    <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-serif font-bold mb-6 flex items-center space-x-3">
+                            <i data-lucide="check-square" class="h-5 w-5 text-blue-500"></i>
+                            <span>Admin Tasks</span>
+                        </h3>
+                        <div class="space-y-4" id="taskList">
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                                <input type="checkbox" class="w-4 h-4 rounded text-luxury-600 focus:ring-luxury-500">
+                                <span class="text-xs font-medium text-gray-600">Restock Saffron Ember</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                                <input type="checkbox" class="w-4 h-4 rounded text-luxury-600 focus:ring-luxury-500">
+                                <span class="text-xs font-medium text-gray-600">Follow up on Bulk Order #1029</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
+                                <input type="checkbox" class="w-4 h-4 rounded text-luxury-600 focus:ring-luxury-500">
+                                <span class="text-xs font-medium text-gray-600">Update Q1 Revenue Forecast</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 border border-dashed border-gray-300 text-gray-400 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:border-luxury-600 hover:text-luxury-600 transition-all">+ Add Task</button>
+                    </div>
+
+                    <!-- System Info -->
+                    <div class="p-6 bg-white rounded-[30px] border border-gray-100 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Database Sync</span>
+                            <span class="text-[10px] font-bold text-green-600">Active</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                            <div class="h-full bg-green-500" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

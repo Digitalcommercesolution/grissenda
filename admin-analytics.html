@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | Grissenda Euphorias CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">Business Analytics</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">Inventory Velocity & Revenue Forecasting Algorithm.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <select id="timeRange" class="bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold focus:outline-none">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Monthly Revenue</div>
+                        <i data-lucide="trending-up" class="h-5 w-5 text-green-500"></i>
+                    </div>
+                    <div class="text-4xl font-serif font-bold text-luxury-900">R 84,250</div>
+                    <div class="mt-4 text-xs font-medium text-gray-400">Forecasted: <span class="text-luxury-600 font-bold">R 92,000</span></div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Avg Order Value</div>
+                        <i data-lucide="dollar-sign" class="h-5 w-5 text-luxury-400"></i>
+                    </div>
+                    <div class="text-4xl font-serif font-bold text-luxury-900">R 1,650</div>
+                    <div class="mt-4 text-xs font-medium text-green-600 font-bold">+R 120 from last month</div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Customer Lifetime Value</div>
+                        <i data-lucide="users" class="h-5 w-5 text-blue-400"></i>
+                    </div>
+                    <div class="text-4xl font-serif font-bold text-luxury-900">R 4,200</div>
+                    <div class="mt-4 text-xs font-medium text-gray-400">Across <span class="text-blue-600 font-bold">124 customers</span></div>
+                </div>
+            </div>
+
+            <!-- Visual Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+                <!-- Sales Trend (SVG Chart) -->
+                <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-serif font-bold mb-8">Revenue Trend</h3>
+                    <div class="relative h-64 w-full">
+                        <!-- Simulated SVG Line Chart -->
+                        <svg class="w-full h-full" viewBox="0 0 400 150">
+                            <path d="M 0,140 Q 50,130 80,110 T 150,90 T 220,100 T 300,50 T 400,20" 
+                                  fill="none" stroke="#bfa094" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 0,140 Q 50,130 80,110 T 150,90 T 220,100 T 300,50 T 400,20 V 150 H 0 Z" 
+                                  fill="url(#gradient)" opacity="0.1"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#bfa094;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#bfa094;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="flex justify-between mt-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            <span>Week 1</span>
+                            <span>Week 2</span>
+                            <span>Week 3</span>
+                            <span>Week 4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Sales Share (Algorithm Result) -->
+                <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-serif font-bold mb-8">Product Performance</h3>
+                    <div class="space-y-6" id="productStats">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Velocity Algorithm -->
+            <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-serif font-bold mb-2">Inventory Velocity Algorithm</h3>
+                <p class="text-sm text-gray-400 mb-8 italic">Predictive analysis based on average daily sales velocity.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="space-y-6" id="inventoryStats">
+                        <!-- Injected by JS -->
+                    </div>
+                    <div class="bg-luxury-50 p-8 rounded-[30px] border border-luxury-100">
+                        <h4 class="font-bold text-luxury-900 mb-4">Replenishment Alerts</h4>
+                        <div id="alerts" class="space-y-4">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        // Data for Analytics System
+        const inventory = [
+            { name: "Neroli Splendour", stock: 15, dailyAvg: 1.2 },
+            { name: "Saffron Ember", stock: 8, dailyAvg: 0.8 },
+            { name: "Midnight Velvet", stock: 12, dailyAvg: 2.1 },
+            { name: "Gardenia Muse", stock: 20, dailyAvg: 0.5 },
+            { name: "Santal Oasis", stock: 5, dailyAvg: 1.5 },
+            { name: "Citrus Bloom", stock: 18, dailyAvg: 0.4 }
+        ];
+
+        function calculateVelocity() {
+            const productStats = document.getElementById('productStats');
+            const inventoryStats = document.getElementById('inventoryStats');
+            const alerts = document.getElementById('alerts');
+            
+            productStats.innerHTML = '';
+            inventoryStats.innerHTML = '';
+            alerts.innerHTML = '';
+
+            inventory.sort((a, b) => (b.dailyAvg * 30) - (a.dailyAvg * 30)).forEach(item => {
+                const monthlySales = Math.round(item.dailyAvg * 30);
+                const daysLeft = Math.round(item.stock / item.dailyAvg);
+                
+                // Render Product Stats
+                productStats.innerHTML += `
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                            <span>${item.name}</span>
+                            <span>${monthlySales} Sold/mo</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                            <div class="h-full bg-luxury-500" style="width: ${Math.min(100, monthlySales * 2)}%"></div>
+                        </div>
+                    </div>
+                `;
+
+                // Render Inventory Stats
+                inventoryStats.innerHTML += `
+                    <div class="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
+                        <div class="text-sm font-medium">${item.name}</div>
+                        <div class="flex items-center space-x-8">
+                            <div class="text-right">
+                                <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Stock</div>
+                                <div class="text-sm font-bold ${item.stock < 10 ? 'text-red-500' : 'text-gray-900'}">${item.stock} units</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Runway</div>
+                                <div class="text-sm font-bold ${daysLeft < 7 ? 'text-red-500' : 'text-gray-900'}">${daysLeft} days</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Render Alerts
+                if (daysLeft < 7) {
+                    alerts.innerHTML += `
+                        <div class="bg-white p-4 rounded-2xl flex items-center space-x-4 shadow-sm border border-red-100">
+                            <i data-lucide="alert-triangle" class="h-5 w-5 text-red-500"></i>
+                            <div>
+                                <div class="text-xs font-bold text-red-600 uppercase tracking-widest">Low Stock Alert</div>
+                                <div class="text-sm font-medium">${item.name} will run out in ${daysLeft} days.</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (alerts.innerHTML === '') {
+                alerts.innerHTML = '<div class="text-sm text-luxury-400 italic">All stock levels are healthy.</div>';
+            }
+
+            lucide.createIcons();
+        }
+
+        // Init
+        calculateVelocity();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

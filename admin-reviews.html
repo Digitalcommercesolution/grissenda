@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Management | Grissenda Euphorias CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+                <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 transition-all"><i data-lucide="log-out" class="h-5 w-5"></i><span class="font-medium">Logout</span></button>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">Review Moderation</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">Sentiment Analysis & Reputation Management active.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-blue-50 rounded-full border border-blue-100">
+                        <i data-lucide="smile" class="h-4 w-4 text-blue-600"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-blue-700">85% Positive Sentiment</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Reviews</div>
+                    <div class="text-3xl font-serif font-bold">142</div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Average Rating</div>
+                    <div class="text-3xl font-serif font-bold flex items-center">
+                        4.8
+                        <div class="flex ml-4 text-luxury-500">
+                            <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Pending Moderation</div>
+                    <div class="text-3xl font-serif font-bold text-amber-600">3</div>
+                </div>
+            </div>
+
+            <!-- Review List -->
+            <div class="bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Customer</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Review</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Rating</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Status</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reviewTableBody">
+                        <!-- Injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        function renderAdminReviews() {
+            const tbody = document.getElementById('reviewTableBody');
+            tbody.innerHTML = reviews.map(r => `
+                <tr class="border-b border-gray-50 hover:bg-gray-50 transition-all group">
+                    <td class="px-8 py-5">
+                        <div class="text-sm font-bold text-gray-900">${r.customer}</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">${r.date}</div>
+                    </td>
+                    <td class="px-8 py-5">
+                        <div class="text-sm text-gray-600 italic max-w-md">"${r.comment}"</div>
+                    </td>
+                    <td class="px-8 py-5">
+                        <div class="flex space-x-0.5 text-luxury-500">
+                            ${Array(5).fill(0).map((_, i) => `<i data-lucide="star" class="h-3 w-3 ${i < r.rating ? 'fill-current' : ''}"></i>`).join('')}
+                        </div>
+                    </td>
+                    <td class="px-8 py-5">
+                        <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md ${r.status === 'Approved' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}">
+                            ${r.status}
+                        </span>
+                    </td>
+                    <td class="px-8 py-5 text-right">
+                        <div class="flex justify-end space-x-2">
+                            ${r.status === 'Pending' ? `
+                                <button onclick="moderateReview(${r.id}, 'Approved')" class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-all" title="Approve"><i data-lucide="check" class="h-4 w-4"></i></button>
+                            ` : ''}
+                            <button class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all" title="Delete"><i data-lucide="trash-2" class="h-4 w-4"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function moderateReview(id, status) {
+            const review = reviews.find(r => r.id === id);
+            if (review) {
+                review.status = status;
+                renderAdminReviews();
+                showToast(`Review from ${review.customer} ${status.toLowerCase()}.`);
+            }
+        }
+
+        renderAdminReviews();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

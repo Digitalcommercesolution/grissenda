@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Settings | Grissenda Euphorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+                <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 transition-all"><i data-lucide="log-out" class="h-5 w-5"></i><span class="font-medium">Logout</span></button>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">CRM Settings</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">System Configuration & Security Controls.</p>
+                </div>
+                <button onclick="saveSettings()" class="bg-luxury-900 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:opacity-90 transition-all">Save Changes</button>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <!-- General Section -->
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-serif font-bold mb-8 flex items-center space-x-3">
+                            <i data-lucide="building" class="h-5 w-5 text-luxury-500"></i>
+                            <span>General Configuration</span>
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Business Name</label>
+                                <input type="text" value="Grissenda Euphorias" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-luxury-500 focus:outline-none transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Currency Symbol</label>
+                                <input type="text" value="R (ZAR)" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-luxury-500 focus:outline-none transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Time Zone</label>
+                                <select class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-luxury-500 focus:outline-none transition-all">
+                                    <option>SAST (GMT+2)</option>
+                                    <option>GMT</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">VAT Rate (%)</label>
+                                <input type="number" value="15" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-luxury-500 focus:outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Integrations -->
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-serif font-bold mb-8 flex items-center space-x-3">
+                            <i data-lucide="zap" class="h-5 w-5 text-amber-500"></i>
+                            <span>Integrations & Automation</span>
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-[#25D366] p-3 rounded-xl text-white"><i data-lucide="message-circle" class="h-6 w-6"></i></div>
+                                    <div>
+                                        <div class="font-bold">WhatsApp Business API</div>
+                                        <div class="text-xs text-gray-400">Automated lead notification active.</div>
+                                    </div>
+                                </div>
+                                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Connected</div>
+                            </div>
+                            <div class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-blue-600 p-3 rounded-xl text-white"><i data-lucide="mail" class="h-6 w-6"></i></div>
+                                    <div>
+                                        <div class="font-bold">SendGrid Email Automation</div>
+                                        <div class="text-xs text-gray-400">Order confirmation emails enabled.</div>
+                                    </div>
+                                </div>
+                                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Connected</div>
+                            </div>
+                            <div class="flex items-center justify-between p-6 bg-gray-50 rounded-2xl border border-gray-100 opacity-50">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-red-500 p-3 rounded-xl text-white"><i data-lucide="credit-card" class="h-6 w-6"></i></div>
+                                    <div>
+                                        <div class="font-bold">PayFast Payment Gateway</div>
+                                        <div class="text-xs text-gray-400">Sandbox mode active.</div>
+                                    </div>
+                                </div>
+                                <button class="text-luxury-600 font-bold text-xs uppercase tracking-widest">Activate Pro</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Settings -->
+                <div class="space-y-8">
+                    <!-- Backup System -->
+                    <div class="bg-luxury-900 p-8 rounded-[40px] shadow-xl text-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                        <h3 class="text-xl font-serif font-bold mb-6 relative z-10 flex items-center space-x-3">
+                            <i data-lucide="shield" class="h-5 w-5 text-luxury-300"></i>
+                            <span>Backup & Security</span>
+                        </h3>
+                        <div class="space-y-4 mb-8 relative z-10">
+                            <div class="flex justify-between text-xs text-luxury-200">
+                                <span>Last Backup</span>
+                                <span class="font-bold">2 hours ago</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div class="h-full bg-luxury-300" style="width: 85%"></div>
+                            </div>
+                            <div class="text-[10px] text-luxury-400 italic">8.2 GB of 10 GB Cloud Storage used.</div>
+                        </div>
+                        <button onclick="runBackup()" class="w-full bg-white text-luxury-900 py-3 rounded-xl font-bold text-sm hover:bg-luxury-50 transition-all relative z-10">
+                            Manual Backup Now
+                        </button>
+                    </div>
+
+                    <!-- Team Management -->
+                    <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-serif font-bold mb-6 flex items-center space-x-3">
+                            <i data-lucide="users" class="h-5 w-5 text-blue-500"></i>
+                            <span>Team Access</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-luxury-100 flex items-center justify-center text-luxury-600 font-bold text-xs">A</div>
+                                <div class="flex-grow">
+                                    <div class="text-sm font-bold">Admin (You)</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-widest">Full Control</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">S</div>
+                                <div class="flex-grow">
+                                    <div class="text-sm font-bold">Sales Lead</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-widest">Orders & CRM Only</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 border border-dashed border-gray-300 text-gray-400 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:border-luxury-600 hover:text-luxury-600 transition-all">
+                            Invite Member
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        function runBackup() {
+            showToast("System backup initiated...");
+            setTimeout(() => {
+                showToast("Data encryption complete.");
+                setTimeout(() => {
+                    showToast("Cloud sync successful. 100% Secure.");
+                }, 1000);
+            }, 1000);
+        }
+
+        function saveSettings() {
+            showToast("System settings updated successfully!");
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>

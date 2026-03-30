@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Grissenda Euphorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-luxury-50 text-luxury-900 font-sans">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-luxury-100 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i data-lucide="flower-2" class="h-8 w-8 text-luxury-600"></i>
+                    <span class="text-xl font-serif font-bold text-luxury-900 tracking-tight">Grissenda <span class="text-luxury-500">Euphorias</span></span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="shop.html" class="nav-link">Shop</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-5">
+                    <a href="cart.html" class="text-luxury-400 hover:text-luxury-600 relative">
+                        <i data-lucide="shopping-cart" class="h-5 w-5"></i>
+                        <span class="cart-badge absolute -top-2 -right-2 bg-luxury-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <a href="login.html" class="text-luxury-400 hover:text-luxury-600"><i data-lucide="user" class="h-5 w-5"></i></a>
+                    <a href="login.html" class="bg-luxury-900 text-white px-4 py-2 rounded-md text-xs font-medium">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div>
+                    <span class="uppercase tracking-[0.3em] text-xs font-semibold text-luxury-600 mb-4 block">Contact Us</span>
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">Let's Start a <br> Fragrant Conversation</h1>
+                    <p class="text-lg text-luxury-400 mb-12 leading-relaxed max-w-lg">Have questions about our signature scents or interested in corporate gifting? Reach out and we'll get back to you within 24 hours.</p>
+
+                    <div class="space-y-8 mb-12">
+                        <div class="flex items-start space-x-6">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-luxury-100"><i data-lucide="phone" class="h-6 w-6 text-luxury-600"></i></div>
+                            <div>
+                                <div class="text-sm text-luxury-400 uppercase tracking-widest mb-1">Call or WhatsApp</div>
+                                <div class="text-lg font-serif font-bold text-luxury-900">+27 123 456 789</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-6">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-luxury-100"><i data-lucide="mail" class="h-6 w-6 text-luxury-600"></i></div>
+                            <div>
+                                <div class="text-sm text-luxury-400 uppercase tracking-widest mb-1">Email Us</div>
+                                <div class="text-lg font-serif font-bold text-luxury-900">info@grissenda.co.za</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/27123456789" target="_blank" class="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:opacity-90 transition-all inline-flex items-center space-x-3 shadow-lg">
+                        <i data-lucide="message-circle" class="h-5 w-5"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-luxury-50 relative overflow-hidden">
+                    <form id="contact-form" class="relative z-10 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-luxury-400 ml-1">Full Name</label>
+                                <input required type="text" name="name" placeholder="John Doe" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200 transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-widest text-luxury-400 ml-1">Email Address</label>
+                                <input required type="email" name="email" placeholder="john@example.com" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200 transition-all">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-luxury-400 ml-1">Your Message</label>
+                            <textarea required name="message" rows="4" placeholder="Tell us more..." class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200 transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full luxury-gradient text-white py-5 rounded-2xl font-bold shadow-xl hover:opacity-90 transition-all flex items-center justify-center space-x-3 group">
+                            <span>Send Message</span>
+                            <i data-lucide="send" class="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </button>
+                    </form>
+                    <div id="success-msg" class="hidden h-full flex flex-col items-center justify-center text-center py-12">
+                        <div class="bg-green-50 p-6 rounded-full mb-6"><i data-lucide="send" class="h-12 w-12 text-green-600"></i></div>
+                        <h3 class="text-2xl font-serif font-bold mb-4">Message Sent!</h3>
+                        <p class="text-luxury-400">Thank you for reaching out. We'll contact you shortly.</p>
+                        <button onclick="window.location.reload()" class="mt-8 text-luxury-600 font-bold hover:underline">Send another message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-luxury-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-luxury-400 text-xs">
+            <p>© 2026 Grissenda Euphorias. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('contact-form').classList.add('hidden');
+            document.getElementById('success-msg').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

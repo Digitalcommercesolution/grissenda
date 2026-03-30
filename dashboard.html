@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Grissenda Euphorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-luxury-50 text-luxury-900 font-sans">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-luxury-100 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i data-lucide="flower-2" class="h-8 w-8 text-luxury-600"></i>
+                    <span class="text-xl font-serif font-bold text-luxury-900 tracking-tight">Grissenda <span class="text-luxury-500">Euphorias</span></span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="shop.html" class="nav-link">Shop</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-5">
+                    <a href="cart.html" class="text-luxury-400 hover:text-luxury-600 relative">
+                        <i data-lucide="shopping-cart" class="h-5 w-5"></i>
+                        <span class="cart-badge absolute -top-2 -right-2 bg-luxury-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <a href="dashboard.html" class="text-luxury-400 hover:text-luxury-600 active"><i data-lucide="user" class="h-5 w-5"></i></a>
+                    <a href="admin.html" class="bg-luxury-900 text-white px-4 py-2 rounded-md text-xs font-medium">Admin</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Sidebar -->
+                <aside class="lg:w-80 flex-shrink-0">
+                    <div class="bg-white p-10 rounded-[40px] shadow-xl border border-luxury-50 text-center">
+                        <div class="w-24 h-24 bg-luxury-100 rounded-full mx-auto mb-6 flex items-center justify-center relative group">
+                            <i data-lucide="user" class="h-10 w-10 text-luxury-600"></i>
+                            <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                <i data-lucide="settings" class="h-6 w-6 text-white"></i>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-luxury-900 mb-2">Jane Doe</h2>
+                        <p class="text-luxury-400 text-sm mb-8 italic">Member since Feb 2024</p>
+                        
+                            <button onclick="switchTab('orders')" id="tab-orders" class="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl bg-luxury-900 text-white shadow-lg transition-all">
+                                <i data-lucide="package" class="h-5 w-5"></i>
+                                <span class="font-bold text-sm uppercase tracking-widest">My Orders</span>
+                            </button>
+                            <button onclick="switchTab('profile')" id="tab-profile" class="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl hover:bg-luxury-50 text-luxury-400 transition-all">
+                                <i data-lucide="user-round" class="h-5 w-5"></i>
+                                <span class="font-bold text-sm uppercase tracking-widest">My Profile</span>
+                            </button>
+                            <button onclick="switchTab('reviews')" id="tab-reviews" class="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl hover:bg-luxury-50 text-luxury-400 transition-all">
+                                <i data-lucide="star" class="h-5 w-5"></i>
+                                <span class="font-bold text-sm uppercase tracking-widest">My Reviews</span>
+                            </button>
+                            <button class="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl hover:bg-luxury-50 text-luxury-400">
+                                <i data-lucide="heart" class="h-5 w-5"></i>
+                                <span class="font-bold text-sm uppercase tracking-widest">Wishlist</span>
+                            </button>
+                            <button onclick="logout()" class="w-full flex items-center space-x-4 px-6 py-4 rounded-2xl hover:bg-luxury-50 text-red-500 transition-all">
+                                <i data-lucide="log-out" class="h-5 w-5"></i>
+                                <span class="font-bold text-sm uppercase tracking-widest">Logout</span>
+                            </button>
+                        </nav>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="flex-grow space-y-12">
+                    <div id="order-success-msg" class="hidden bg-green-50 border border-green-200 p-6 rounded-3xl animate-in fade-in zoom-in duration-500 mb-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-100 p-2 rounded-full"><i data-lucide="check" class="h-5 w-5 text-green-600"></i></div>
+                            <div>
+                                <h4 class="font-bold text-green-900">Order Placed Successfully!</h4>
+                                <p class="text-green-700 text-sm">Thank you for your purchase. We've added your new fragrance to your collection below.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Section -->
+                    <div id="section-orders" class="bg-white p-10 rounded-[40px] shadow-sm border border-luxury-50">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="text-2xl font-serif font-bold">Recent Orders</h3>
+                            <a href="shop.html" class="text-luxury-600 text-sm font-bold hover:underline">Continue Shopping</a>
+                        </div>
+                        <div class="space-y-6" id="orders-list">
+                            <!-- Items will be injected here -->
+                            <div class="bg-luxury-50 p-6 rounded-3xl border border-luxury-100 flex flex-col md:flex-row items-center justify-between group hover:shadow-md transition-shadow">
+                                <div class="flex items-center space-x-6">
+                                    <div class="bg-white p-4 rounded-2xl shadow-sm"><i data-lucide="package" class="h-6 w-6 text-luxury-400"></i></div>
+                                    <div>
+                                        <div class="text-xs text-luxury-400 font-bold uppercase tracking-widest">ORD-1023</div>
+                                        <div class="text-lg font-serif font-bold text-luxury-900">Neroli Splendour</div>
+                                        <div class="text-xs text-luxury-400 mt-1">Ordered on 2024-03-15</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-12 mt-4 md:mt-0">
+                                    <div class="text-right">
+                                        <div class="text-sm font-bold text-luxury-900">R 1,180</div>
+                                        <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md bg-green-100 text-green-700">Delivered</span>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="h-5 w-5 text-luxury-300 group-hover:translate-x-1 transition-transform"></i>
+                                </div>
+                            </div>
+
+                            <!-- Tracking Visualizer for the most recent order -->
+                            <div class="mt-12 p-8 bg-luxury-900 rounded-[40px] text-white relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                                <h4 class="text-lg font-serif font-bold mb-8 flex items-center space-x-3">
+                                    <i data-lucide="map" class="h-5 w-5 text-luxury-300"></i>
+                                    <span>Live Shipping Tracker</span>
+                                </h4>
+                                
+                                <div class="relative flex justify-between items-start">
+                                    <!-- Progress Line -->
+                                    <div class="absolute top-5 left-0 w-full h-0.5 bg-white/10 -z-0">
+                                        <div class="h-full bg-luxury-300" style="width: 66%"></div>
+                                    </div>
+                                    
+                                    <!-- Steps -->
+                                    <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                                        <div class="w-10 h-10 rounded-full bg-luxury-300 text-luxury-900 flex items-center justify-center shadow-lg">
+                                            <i data-lucide="check" class="h-5 w-5"></i>
+                                        </div>
+                                        <div class="text-[10px] font-bold uppercase tracking-widest">Confirmed</div>
+                                    </div>
+                                    
+                                    <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                                        <div class="w-10 h-10 rounded-full bg-luxury-300 text-luxury-900 flex items-center justify-center shadow-lg">
+                                            <i data-lucide="package" class="h-5 w-5"></i>
+                                        </div>
+                                        <div class="text-[10px] font-bold uppercase tracking-widest">Dispatched</div>
+                                    </div>
+                                    
+                                    <div class="relative z-10 flex flex-col items-center text-center space-y-3">
+                                        <div class="w-10 h-10 rounded-full bg-luxury-300 text-luxury-900 flex items-center justify-center shadow-lg animate-pulse">
+                                            <i data-lucide="truck" class="h-5 w-5"></i>
+                                        </div>
+                                        <div class="text-[10px] font-bold uppercase tracking-widest text-luxury-300">In Transit</div>
+                                    </div>
+                                    
+                                    <div class="relative z-10 flex flex-col items-center text-center space-y-3 opacity-30">
+                                        <div class="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center">
+                                            <i data-lucide="home" class="h-5 w-5"></i>
+                                        </div>
+                                        <div class="text-[10px] font-bold uppercase tracking-widest">Delivered</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-10 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-luxury-400">Tracking ID:</div>
+                                        <div class="text-sm font-bold font-serif">GRS-ZA-9928341</div>
+                                    </div>
+                                    <div class="text-[10px] text-luxury-400 italic">Estimated arrival: Thursday, 26th March</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Section (Hidden by default) -->
+                    <div id="section-profile" class="hidden bg-white p-10 rounded-[40px] shadow-sm border border-luxury-50">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="text-2xl font-serif font-bold">Account Details</h3>
+                            <button onclick="saveProfile()" class="bg-luxury-900 text-white px-6 py-2 rounded-xl text-xs font-bold shadow-md">Save Changes</button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Full Name</label>
+                                <input type="text" id="prof-name" value="Jane Doe" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                                <input type="email" id="prof-email" value="jane.doe@example.com" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Phone Number</label>
+                                <input type="tel" id="prof-phone" value="+27 72 123 4567" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Primary Address</label>
+                                <input type="text" id="prof-address" value="123 Luxury Lane, Umhlanga, KZN" class="w-full bg-luxury-50 border border-luxury-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-luxury-200">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Section (Hidden by default) -->
+                    <div id="section-reviews" class="hidden bg-white p-10 rounded-[40px] shadow-sm border border-luxury-50">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="text-2xl font-serif font-bold">My Reviews</h3>
+                            <button class="text-luxury-600 text-sm font-bold hover:underline">Write a Review</button>
+                        </div>
+                        <div class="space-y-6" id="my-reviews-list">
+                            <!-- Injected by JS -->
+                            <div class="bg-luxury-50 p-6 rounded-3xl border border-luxury-100">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-luxury-100">
+                                            <i data-lucide="star" class="h-5 w-5 text-luxury-500 fill-current"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-serif font-bold text-luxury-900">Neroli Splendour</div>
+                                            <div class="flex space-x-1 text-luxury-500">
+                                                <i data-lucide="star" class="h-3 w-3 fill-current"></i>
+                                                <i data-lucide="star" class="h-3 w-3 fill-current"></i>
+                                                <i data-lucide="star" class="h-3 w-3 fill-current"></i>
+                                                <i data-lucide="star" class="h-3 w-3 fill-current"></i>
+                                                <i data-lucide="star" class="h-3 w-3 fill-current"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md bg-green-100 text-green-700">Approved</span>
+                                </div>
+                                <p class="text-sm text-luxury-400 leading-relaxed italic">"Absolutely wonderful fragrance. It's subtle yet long-lasting."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Extra -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="bg-white p-10 rounded-[40px] shadow-sm border border-luxury-50">
+                            <h3 class="text-2xl font-serif font-bold mb-8">Preferences</h3>
+                            <div class="flex flex-wrap gap-3 mb-8">
+                                <span class="bg-luxury-50 text-luxury-600 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border border-luxury-100">Floral</span>
+                                <span class="bg-luxury-50 text-luxury-600 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border border-luxury-100">Oriental</span>
+                                <button class="bg-white border border-dashed border-luxury-300 text-luxury-400 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:border-luxury-600 transition-all">+ Add More</button>
+                            </div>
+                            <p class="text-sm text-luxury-400 leading-relaxed italic">We'll use these to recommend fragrances that match your profile.</p>
+                        </div>
+                        <div class="luxury-gradient p-10 rounded-[40px] shadow-xl text-white relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+                            <h3 class="text-2xl font-serif font-bold mb-4 relative z-10">Early Access</h3>
+                            <p class="text-luxury-50 mb-8 leading-relaxed text-sm relative z-10">As a valued customer, you have early access to our limited "Velvet Collection" coming this winter.</p>
+                            <button class="bg-white text-luxury-900 px-8 py-4 rounded-full font-bold hover:bg-luxury-50 transition-all text-xs uppercase tracking-widest relative z-10">View Early Access</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-luxury-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-luxury-400 text-xs">
+            <p>© 2026 Grissenda Euphorias. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('customer');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('order_success')) {
+            document.getElementById('order-success-msg').classList.remove('hidden');
+        }
+
+        function switchTab(tab) {
+            const sections = ['orders', 'profile', 'reviews'];
+            sections.forEach(s => {
+                const section = document.getElementById(`section-${s}`);
+                const tabBtn = document.getElementById(`tab-${s}`);
+                if (section) section.classList.add('hidden');
+                if (tabBtn) {
+                    tabBtn.classList.remove('bg-luxury-900', 'text-white', 'shadow-lg');
+                    tabBtn.classList.add('hover:bg-luxury-50', 'text-luxury-400');
+                }
+            });
+
+            const activeSection = document.getElementById(`section-${tab}`);
+            const activeTabBtn = document.getElementById(`tab-${tab}`);
+            if (activeSection) activeSection.classList.remove('hidden');
+            if (activeTabBtn) {
+                activeTabBtn.classList.remove('hover:bg-luxury-50', 'text-luxury-400');
+                activeTabBtn.classList.add('bg-luxury-900', 'text-white', 'shadow-lg');
+            }
+            
+            lucide.createIcons();
+        }
+
+        function saveProfile() {
+            const profile = {
+                name: document.getElementById('prof-name').value,
+                email: document.getElementById('prof-email').value,
+                phone: document.getElementById('prof-phone').value,
+                address: document.getElementById('prof-address').value
+            };
+            localStorage.setItem('grissenda_profile', JSON.stringify(profile));
+            if (typeof showToast === 'function') {
+                showToast("Profile details secured.");
+            } else {
+                alert("Profile details secured.");
+            }
+        }
+
+        function loadProfile() {
+            const saved = localStorage.getItem('grissenda_profile');
+            if (saved) {
+                const p = JSON.parse(saved);
+                document.getElementById('prof-name').value = p.name;
+                document.getElementById('prof-email').value = p.email;
+                document.getElementById('prof-phone').value = p.phone;
+                document.getElementById('prof-address').value = p.address;
+            }
+        }
+
+        loadProfile();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

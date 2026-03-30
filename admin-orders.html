@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order CRM | Grissenda Euphorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+                <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 transition-all"><i data-lucide="log-out" class="h-5 w-5"></i><span class="font-medium">Logout</span></button>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">Order Management</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">Advanced Sales Pipeline & Status Tracking System.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="flex items-center space-x-2 bg-white border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all">
+                        <i data-lucide="download" class="h-4 w-4"></i>
+                        <span>Export CSV</span>
+                    </button>
+                    <button class="bg-luxury-900 text-white px-6 py-2 rounded-xl text-sm font-bold shadow-lg hover:opacity-90 transition-all">+ New Order</button>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <div class="bg-white p-6 rounded-[30px] shadow-sm border border-gray-100 mb-8 flex flex-wrap items-center gap-4">
+                <div class="flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                    <i data-lucide="filter" class="h-4 w-4 text-gray-400"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Status:</span>
+                    <select id="statusFilter" class="bg-transparent text-sm font-bold focus:outline-none">
+                        <option value="All">All Stages</option>
+                        <option value="Enquiry">Enquiry</option>
+                        <option value="Sample Sent">Sample Sent</option>
+                        <option value="Quoted">Quoted</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </div>
+                <div class="flex-grow"></div>
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                    <input type="text" id="orderSearch" placeholder="Search Order ID or Customer..." class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-luxury-500 transition-all text-sm w-64">
+                </div>
+            </div>
+
+            <!-- Pipeline Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-10">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Enquiry</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-enquiry">0</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Sample</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-sample">0</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Quoted</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-quoted">0</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Confirmed</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-confirmed">0</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Paid</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-paid">0</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Delivered</div>
+                    <div class="text-xl font-serif font-bold text-gray-900" id="count-delivered">0</div>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Order ID</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Customer</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Tracking #</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Stage</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400 text-right">Update Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                        <!-- Rows injected by System -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        const orders = [
+            { id: "ORD-1023", customer: "Sarah Johnson", product: "Neroli Splendour", amount: 1180, stage: "Delivered", tracking: "GRS-ZA-102301", date: "2024-03-20" },
+            { id: "ORD-1024", customer: "David Mbeki", product: "Saffron Ember", amount: 2120, stage: "Paid", tracking: "---", date: "2024-03-21" },
+            { id: "ORD-1025", customer: "Thabo Khumalo", product: "Midnight Velvet", amount: 1850, stage: "Confirmed", tracking: "---", date: "2024-03-22" },
+            { id: "ORD-1026", customer: "Emily White", product: "Gardenia Muse", amount: 1420, stage: "Quoted", tracking: "---", date: "2024-03-23" },
+            { id: "ORD-1027", customer: "Nandipha Zulu", product: "Santal Oasis", amount: 1980, stage: "Enquiry", tracking: "---", date: "2024-03-24" },
+            { id: "ORD-1028", customer: "Jessica Bloom", product: "Citrus Bloom", amount: 1250, stage: "Sample Sent", tracking: "---", date: "2024-03-24" },
+            { id: "ORD-1029", customer: "Michael Chen", product: "Saffron Ember (x2)", amount: 4240, stage: "Paid", tracking: "---", date: "2024-03-24" },
+            { id: "ORD-1030", customer: "Kevin Smith", product: "Neroli Splendour", amount: 1180, stage: "Confirmed", tracking: "---", date: "2024-03-24" }
+        ];
+
+        const stages = ["Enquiry", "Sample Sent", "Quoted", "Confirmed", "Paid", "Delivered"];
+        const stageColors = {
+            "Enquiry": "bg-gray-100 text-gray-700",
+            "Sample Sent": "bg-blue-100 text-blue-700",
+            "Quoted": "bg-amber-100 text-amber-700",
+            "Confirmed": "bg-luxury-100 text-luxury-700",
+            "Paid": "bg-green-100 text-green-700",
+            "Delivered": "bg-green-600 text-white"
+        };
+
+        function updateOrderStatus(id, newStage) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                order.stage = newStage;
+                renderOrders();
+                showToast(`Order ${id} updated to ${newStage}`);
+            }
+        }
+
+        function assignTracking(id) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                order.tracking = `GRS-ZA-${Math.floor(100000 + Math.random() * 900000)}`;
+                renderOrders();
+                showToast(`Tracking generated for ${id}`);
+            }
+        }
+
+        function renderOrders() {
+            const tbody = document.getElementById('orderTableBody');
+            const search = document.getElementById('orderSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            const counts = { Enquiry: 0, "Sample Sent": 0, Quoted: 0, Confirmed: 0, Paid: 0, Delivered: 0 };
+            
+            tbody.innerHTML = '';
+            
+            orders.filter(o => {
+                const matchesSearch = o.id.toLowerCase().includes(search) || o.customer.toLowerCase().includes(search);
+                const matchesStatus = statusFilter === 'All' || o.stage === statusFilter;
+                return matchesSearch && matchesStatus;
+            }).forEach(o => {
+                // Update stats for all (even if filtered for table)
+                counts[o.stage]++;
+
+                tbody.innerHTML += `
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-all group">
+                        <td class="px-8 py-5 font-bold text-sm text-luxury-900">
+                            ${o.id}
+                            <div class="text-[10px] text-gray-400 font-normal mt-1 italic">${o.product}</div>
+                        </td>
+                        <td class="px-8 py-5 text-sm">${o.customer}</td>
+                        <td class="px-8 py-5 text-[10px] font-mono font-bold text-gray-400 tracking-wider">${o.tracking}</td>
+                        <td class="px-8 py-5">
+                            <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg ${stageColors[o.stage]}">
+                                ${o.stage}
+                            </span>
+                        </td>
+                        <td class="px-8 py-5 text-right">
+                            <div class="flex items-center justify-end space-x-2">
+                                <button onclick="assignTracking('${o.id}')" class="p-2 text-luxury-400 hover:text-luxury-600 transition-colors" title="Generate Tracking"><i data-lucide="map-pin" class="h-4 w-4"></i></button>
+                                <select onchange="updateOrderStatus('${o.id}', this.value)" class="text-[10px] font-bold uppercase tracking-widest bg-gray-50 border border-gray-100 rounded-lg px-2 py-1 focus:outline-none">
+                                    ${stages.map(s => `<option value="${s}" ${s === o.stage ? 'selected' : ''}>${s}</option>`).join('')}
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update Pipeline Stats
+            document.getElementById('count-enquiry').textContent = counts.Enquiry;
+            document.getElementById('count-sample').textContent = counts["Sample Sent"];
+            document.getElementById('count-quoted').textContent = counts.Quoted;
+            document.getElementById('count-confirmed').textContent = counts.Confirmed;
+            document.getElementById('count-paid').textContent = counts.Paid;
+            document.getElementById('count-delivered').textContent = counts.Delivered;
+
+            lucide.createIcons();
+        }
+
+        document.getElementById('orderSearch').addEventListener('input', renderOrders);
+        document.getElementById('statusFilter').addEventListener('change', renderOrders);
+
+        // Init
+        renderOrders();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

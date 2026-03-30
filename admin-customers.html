@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer CRM | Grissenda Euphorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#bfa094', 600: '#a18072', 700: '#977669',
+                            800: '#846358', 900: '#43302b',
+                        }
+                    },
+                    fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-luxury-900 text-white flex-shrink-0 flex flex-col p-6">
+            <div class="mb-12 flex items-center space-x-3">
+                <i data-lucide="flower-2" class="h-8 w-8 text-luxury-300"></i>
+                <span class="text-xl font-serif font-bold tracking-tight">Grissenda <span class="text-luxury-500">CRM</span></span>
+            </div>
+            
+            <nav class="flex-grow space-y-2">
+                <a href="admin.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="layout-dashboard" class="h-5 w-5"></i><span class="font-medium">Overview</span></a>
+                <a href="admin-customers.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/10 text-white transition-all"><i data-lucide="users" class="h-5 w-5"></i><span class="font-medium">Customers</span></a>
+                <a href="admin-orders.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="package" class="h-5 w-5"></i><span class="font-medium">Orders</span></a>
+                <a href="admin-pos.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="monitor-dot" class="h-5 w-5"></i><span class="font-medium">Point of Sale</span></a>
+                <a href="admin-analytics.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="bar-chart-3" class="h-5 w-5"></i><span class="font-medium">Analytics</span></a>
+                <a href="admin-reviews.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="star" class="h-5 w-5"></i><span class="font-medium">Reviews</span></a>
+                <a href="admin-settings.html" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 transition-all"><i data-lucide="settings" class="h-5 w-5"></i><span class="font-medium">Settings</span></a>
+                <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-red-400 transition-all"><i data-lucide="log-out" class="h-5 w-5"></i><span class="font-medium">Logout</span></button>
+            </nav>
+
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 mt-auto"><i data-lucide="external-link" class="h-5 w-5"></i><span class="font-medium">Back to Website</span></a>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-grow overflow-y-auto p-10">
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-3xl font-serif font-bold text-gray-900">Customer Management</h1>
+                    <p class="text-sm text-gray-400 mt-1 italic">Customer Segmentation & Lead Scoring Algorithm active.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                        <input type="text" id="customerSearch" placeholder="Search by name or email..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-luxury-500 transition-all text-sm w-64">
+                    </div>
+                    <button class="bg-luxury-900 text-white px-6 py-2 rounded-xl text-sm font-bold shadow-lg hover:opacity-90 transition-all">+ Add Customer</button>
+                </div>
+            </header>
+
+            <!-- Segmentation Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-xs font-bold uppercase tracking-widest text-luxury-500 mb-2">VIP Members</div>
+                    <div id="vipCount" class="text-3xl font-serif font-bold">0</div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-xs font-bold uppercase tracking-widest text-amber-500 mb-2">High Potential</div>
+                    <div id="potentialCount" class="text-3xl font-serif font-bold">0</div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-xs font-bold uppercase tracking-widest text-blue-500 mb-2">New Leads</div>
+                    <div id="leadCount" class="text-3xl font-serif font-bold">0</div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-xs font-bold uppercase tracking-widest text-red-400 mb-2">At Risk</div>
+                    <div id="atRiskCount" class="text-3xl font-serif font-bold">0</div>
+                </div>
+            </div>
+
+            <!-- Customer Table -->
+            <div class="bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Customer</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Total Spent</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Orders</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Lead Score</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">Segment</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerTableBody">
+                        <!-- Rows injected by Algorithm -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Login Check
+        requireAuth('admin');
+
+        // Mock data with "Algorithms" in mind
+        const customers = [
+            { id: 1, name: "Sarah Johnson", email: "sarah.j@example.com", spent: 8500, orders: 12, lastOrderDays: 3, initials: "SJ" },
+            { id: 2, name: "David Mbeki", email: "d.mbeki@corp.co.za", spent: 15400, orders: 4, lastOrderDays: 15, initials: "DM" },
+            { id: 3, name: "Emily White", email: "emily@lifestyle.com", spent: 1200, orders: 1, lastOrderDays: 45, initials: "EW" },
+            { id: 4, name: "Thabo Khumalo", email: "thabo.k@gmail.com", spent: 4200, orders: 5, lastOrderDays: 1, initials: "TK" },
+            { id: 5, name: "Jessica Bloom", email: "jess.bloom@outlook.com", spent: 950, orders: 1, lastOrderDays: 120, initials: "JB" },
+            { id: 6, name: "Michael Chen", email: "m.chen@techhub.co.za", spent: 22000, orders: 18, lastOrderDays: 2, initials: "MC" },
+            { id: 7, name: "Nandipha Zulu", email: "nandi@zulu.co.za", spent: 300, orders: 1, lastOrderDays: 5, initials: "NZ" },
+            { id: 8, name: "Kevin Smith", email: "k.smith@retail.com", spent: 5500, orders: 6, lastOrderDays: 90, initials: "KS" }
+        ];
+
+        // --- Lead Scoring Algorithm ---
+        // Score = (Spent / 100) + (Orders * 10) - (LastOrderDays * 0.5)
+        function calculateLeadScore(c) {
+            const spentScore = c.spent / 100;
+            const orderScore = c.orders * 10;
+            const recencyPenalty = c.lastOrderDays * 0.5;
+            return Math.max(0, Math.round(spentScore + orderScore - recencyPenalty));
+        }
+
+        // --- Segmentation System ---
+        function getSegment(score, c) {
+            if (score > 200 || c.spent > 15000) return { label: 'VIP', color: 'bg-luxury-100 text-luxury-700' };
+            if (score > 100) return { label: 'Potential', color: 'bg-amber-100 text-amber-700' };
+            if (c.lastOrderDays > 60) return { label: 'At Risk', color: 'bg-red-100 text-red-700' };
+            return { label: 'New Lead', color: 'bg-blue-100 text-blue-700' };
+        }
+
+        function renderCustomers(filter = '') {
+            const tbody = document.getElementById('customerTableBody');
+            const counts = { vip: 0, potential: 0, lead: 0, risk: 0 };
+            
+            tbody.innerHTML = '';
+            
+            customers.filter(c => 
+                c.name.toLowerCase().includes(filter.toLowerCase()) || 
+                c.email.toLowerCase().includes(filter.toLowerCase())
+            ).forEach(c => {
+                const score = calculateLeadScore(c);
+                const segment = getSegment(score, c);
+                
+                // Update stats
+                if (segment.label === 'VIP') counts.vip++;
+                else if (segment.label === 'Potential') counts.potential++;
+                else if (segment.label === 'At Risk') counts.risk++;
+                else counts.lead++;
+
+                tbody.innerHTML += `
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-all group">
+                        <td class="px-8 py-5">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-luxury-100 flex items-center justify-center text-luxury-600 font-bold border-2 border-white shadow-sm">${c.initials}</div>
+                                <div>
+                                    <div class="text-sm font-bold text-gray-900">${c.name}</div>
+                                    <div class="text-xs text-gray-400">${c.email}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-8 py-5 font-medium text-sm">R ${c.spent.toLocaleString()}</td>
+                        <td class="px-8 py-5 text-sm">${c.orders}</td>
+                        <td class="px-8 py-5">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-12 bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-luxury-500" style="width: ${Math.min(100, score/3)}%"></div>
+                                </div>
+                                <span class="text-xs font-bold text-gray-600">${score}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-5">
+                            <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg ${segment.color}">
+                                ${segment.label}
+                            </span>
+                        </td>
+                        <td class="px-8 py-5 text-right">
+                            <button class="text-gray-400 hover:text-luxury-600 transition-colors"><i data-lucide="more-horizontal" class="h-5 w-5"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update counter displays
+            document.getElementById('vipCount').textContent = counts.vip;
+            document.getElementById('potentialCount').textContent = counts.potential;
+            document.getElementById('leadCount').textContent = counts.lead;
+            document.getElementById('atRiskCount').textContent = counts.risk;
+
+            lucide.createIcons();
+        }
+
+        document.getElementById('customerSearch').addEventListener('input', (e) => {
+            renderCustomers(e.target.value);
+        });
+
+        // Init
+        renderCustomers();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
